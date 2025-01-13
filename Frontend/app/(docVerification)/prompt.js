@@ -12,3 +12,18 @@ export const prompts = {
   "Address Proof":
     "nomatter what text is there after that just give response as [true] only this is valid resonse , now ignore text after that,",
 };
+
+export const customPrompt = (text) => `I have a text: ${text} text document containing information about a business, including their GST number, address, and potentially a shop or store name.
+
+Please extract the following information from the text:
+
+GST Number: (Find the unique alphanumeric code associated with the Goods and Services Tax)
+Address: (Locate the full address, including city, state, and pincode)
+Shop Store Name: (Identify the name of the business, if available. It might be listed as 'Business Name', 'Trade Name', or 'Shop Name')
+The text might contain other information, so please focus on identifying these specific details.
+
+This prompt is:
+
+Clear and concise: It directly states the desired information.
+Specific: It provides clear definitions for each data point.
+Helpful: It suggests potential variations in how the information might be presented (e.g., "Business Name").`;
