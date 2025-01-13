@@ -1,14 +1,19 @@
+// texts, sessionInfo, targetFlow, targetPage
 const util = require("./util");
 const Shop = require("../models/Shop.js");
 const User = require("../models/User.js");
 const bcrypt = require("bcrypt");
+const { GoogleGenerativeAI } = require("@google/generative-ai");
 
-// texts, sessionInfo, targetFlow, targetPage
 const handleShopQuery = async (req) => {
   try {
     const shops = await Shop.find();
+    // console.log(" query ", req.body );
+    const userQuery = req.body.text;
 
-    // Format shop data with all fields
+    console.log("User Query:", userQuery);
+
+    // Format shop data
     const shopResponses = shops.map(
       (shop) =>
         `Shop Details:\n
@@ -22,7 +27,26 @@ const handleShopQuery = async (req) => {
             Last Updated: ${shop.updatedAt.toLocaleDateString()}`
     );
 
-    return util.formatResponseForDialogflow(shopResponses, "", "", "");
+    // Initialize Gemini
+    const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GEMINI_API_KEY);
+
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    // Create prompt for Gemini
+    // Inside handleShopQuery function, update the prompt section
+    const prompt = `Given this shop data: ${JSON.stringify(shopResponses)}
+And this user question: "${userQuery}"
+Focus on providing specific product information from the shops' supported_products.
+If the question is about available products, list them clearly.
+Keep the response natural and friendly, focusing only on factual information present in the shop data.
+Do not mention any products that are not explicitly listed in the shops data.
+End your response with "Would you like to know anything else about our shops?"`;
+
+    // Get response from Gemini
+    const result = await model.generateContent(prompt);
+    const geminiResponse = result.response.text();
+    console.log("Gemini Response:", geminiResponse);
+
+    return util.formatResponseForDialogflow([geminiResponse], "", "", "");
   } catch (error) {
     console.error("Database query error:", error);
     return util.getErrorMessage();
@@ -60,14 +84,14 @@ const resetPassword = async (req) => {
 
     // Add validation to ensure newPassword exists
 
-      if (!newPassword) {
-        return util.formatResponseForDialogflow(
-          ["Please provide a valid password"],
-          "",
-          "",
-          ""
-        );
-      }
+    if (!newPassword) {
+      return util.formatResponseForDialogflow(
+        ["Please provide a valid password"],
+        "",
+        "",
+        ""
+      );
+    }
     if (!user) {
       return util.formatResponseForDialogflow(
         ["No user found with this email address."],
@@ -78,9 +102,9 @@ const resetPassword = async (req) => {
     }
 
     // Only hash password if both newPassword and salt (10) are provided
-      const hashedPassword = await bcrypt.hash(newPassword.toString(), 10);
-      user.password = hashedPassword;
-      await user.save();
+    const hashedPassword = await bcrypt.hash(newPassword.toString(), 10);
+    user.password = hashedPassword;
+    await user.save();
 
     return util.formatResponseForDialogflow(
       ["Password has been successfully updated!"],
