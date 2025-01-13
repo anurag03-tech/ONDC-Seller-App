@@ -1,8 +1,7 @@
 // MuteContext.js
 import React, { createContext, useContext, useState } from "react";
 import { View, TouchableOpacity } from "react-native";
-import { Ionicons } from "@expo/vector-icons"; // Import Ionicons from Expo Vector Icons
-
+import { Ionicons } from "@expo/vector-icons";
 const MuteContext = createContext();
 
 export const MuteProvider = ({ children }) => {
@@ -28,7 +27,7 @@ const MuteToggle = () => {
   const { isMuted, toggleMute } = useMute();
 
   return (
-    <View className="absolute top-0 right-0 z-50 p-1">
+    <View className="absolute m-1 right-0 z-50 p-1">
       <TouchableOpacity
         className="rounded-full p-2 border-black bg-blue-500"
         style={

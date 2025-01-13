@@ -1,7 +1,9 @@
+// documentItem.js
 import React from "react";
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 
+// Constants for status messages and colors
 const STATUS_COLORS = {
   verified: "bg-green-300",
   notVerified: "bg-red-300",
@@ -14,6 +16,7 @@ const STATUS_MESSAGES = {
   pending: "Pending",
 };
 
+// DocumentItem Component
 const DocumentItem = ({ icon, title, onPress, status, imageUri }) => {
   const getStatusColor = () => {
     if (status === true) return STATUS_COLORS.verified;
@@ -37,7 +40,7 @@ const DocumentItem = ({ icon, title, onPress, status, imageUri }) => {
     <View>
       <TouchableOpacity
         activeOpacity={0.4}
-        className={`w-48 h-32 my-1 flex flex-col items-center justify-center rounded-xl shadow-lg py-1 border-[1px] border-gray-400 ${getStatusColor()}`}
+        className={`w-48 h-32 my-1 flex flex-col items-center justify-center rounded-xl shadow-lg py-1 border-[1px] border-blue-500 ${getStatusColor()}`}
         onPress={onPress}
       >
         <View className="self-center flex items-center justify-center p-2 rounded-xl">
@@ -52,12 +55,19 @@ const DocumentItem = ({ icon, title, onPress, status, imageUri }) => {
               }}
             />
           ) : (
-            <FontAwesome name={icon} size={38} color="black" />
+            <FontAwesome
+              name={icon}
+              size={38}
+              style={{ color: "rgb(0 110 177)", opacity: 1 }}
+            />
           )}
         </View>
 
         <View>
-          <Text className="text-center text-lg font-bold leading-tight">
+          <Text
+            className="text-center text-lg font-bold leading-tight text-{#0076CE}"
+            style={{ color: "rgb(0 110 177)", opacity: 1 }}
+          >
             {title}
           </Text>
         </View>

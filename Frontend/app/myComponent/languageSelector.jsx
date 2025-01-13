@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, Pressable } from "react-native";
-import i18next from "i18next";
 import i18n from "../../utils/language/i18n";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 
@@ -18,18 +17,26 @@ const LanguageSelector = () => {
     { label: "తెలుగు", value: "te" },
   ];
 
-  const [selectedValue, setSelectedValue] = useState("Translate");
+  const getLanguageLabel = (languageCode) => {
+    const selectedLang = languageOptions.find(
+      (lang) => lang.value === languageCode
+    );
+    return selectedLang ? selectedLang.label : "English";
+  };
+
+  const [selectedValue, setSelectedValue] = useState(
+    getLanguageLabel(i18n.language)
+  );
   const [dropdownVisible, setDropdownVisible] = useState(false);
 
   const handleSelect = (item) => {
     i18n.changeLanguage(item.value);
-    console.log(i18next.language);
     setSelectedValue(item.label);
     setDropdownVisible(false);
   };
 
   return (
-    <View className="flex items-center h-[48px]">
+    <View className="flex items-center h-[48px] right-12">
       <Pressable
         className="bg-gray-100 py-1 px-2 rounded-lg w-26 mx-2 mt-2 mb-1 items-center border-black flex-row justify-center border-[1px] border-gray-400"
         onPress={() => setDropdownVisible((prev) => !prev)}
