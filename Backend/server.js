@@ -7,7 +7,14 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 const app = express();
-const port = 3000;
+const port = 5000;
+
+// app.use(
+//     cors({
+//       origin: process.env.CORS_ORIGIN,
+//       credentials: true,
+//     })
+//   );
 
 // Middleware to parse JSON bodies
 app.use(express.json());
@@ -21,6 +28,13 @@ app.use('/api/users', userHandler);
 app.use('/api/shops', shopHandler);
 app.use('/api/kyc', KYCHandler);
 app.use('/api/bank-account', bankHandler);
+
+
+// Change from
+const homeRoute = require('./routes/home_route');
+const dialogflowRoute = require('./routes/dialogflow_route');
+app.use(homeRoute.router);
+app.use(dialogflowRoute.router);
 
 
 // Connect to MongoDB and start server

@@ -3,7 +3,8 @@ const jwt = require('jsonwebtoken');
 const validator = require('validator');
 const User = require('../models/User');
 require('dotenv').config();
-const JWT_SECRET = process.env.JWT_SECRET;
+// const JWT_SECRET = process.env.JWT_SECRET;
+const JWT_SECRET = "your-secret-key";
 
 // Helper function to validate user data
 const validateUserData = (data) => {
@@ -76,7 +77,7 @@ exports.updateUser = async (req, res) => {
     try {
         const { id } = req.params;
         const { name, email, password, mob_no, photo_url } = req.body;
-
+        
         const validationErrors = validateUserData({ name, email, password, mob_no, photo_url });
         if (validationErrors.length > 0) {
             return res.status(400).json({ errors: validationErrors });
