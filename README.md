@@ -14,7 +14,10 @@
 - **Automated Document Verification**  
 - **Automated Catalog Creation**  
 - **Multilingual Voice Assistant** (9 different languages)  
-- **Chatbot**  
+- **Chatbot**
+
+ <img src="https://github.com/user-attachments/assets/b24553d0-7b44-483a-8845-947370694f93" width="600" height="488">
+
 
 ## Tech Stack 💻
 ### Frontend
