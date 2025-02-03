@@ -16,7 +16,7 @@
 - **Multilingual Voice Assistant** (9 different languages)  
 - **Chatbot**
 
- <img src="https://github.com/user-attachments/assets/b24553d0-7b44-483a-8845-947370694f93" width="600" height="488">
+ <img src="https://github.com/user-attachments/assets/16ee0cbe-ec70-4031-aab2-d1bcfaaf0837" width="500" height="373">
 
 
 ## Tech Stack 💻
