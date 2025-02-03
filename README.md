@@ -5,6 +5,9 @@
 - **College**: Netaji Subhas University of Technology, Delhi
 - **Problem Statement**: PS:3 - Revolutionizing Onboarding for Kirana Stores
 
+### [App Demo Video](https://www.youtube.com/watch?v=pKKPCBb3KKw){:target="_blank"}
+### [PPT](https://drive.google.com/file/d/1BAIDGt9H2TqT3sqOQAWtlcJEXJTX97nl/view?usp=sharing){:target="_blank"}
+
 ## Presentation Deck, Video Demonstration and APK File (Google Drive Link)
 [Click Here](https://drive.google.com/drive/folders/1sTWvypS9DgQsAeffXuO7PUecVJ6He2zZ?usp=sharing)
 
